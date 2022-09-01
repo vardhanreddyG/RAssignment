@@ -13,5 +13,5 @@ npm run counter
 2. HTTP Request Handling
 
 ```bash
-npm run episodes
+npm run http
 ```

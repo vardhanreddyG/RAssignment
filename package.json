@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon",
     "counter": "ts-node ./src/counter",
-    "episodes": "ts-node ./src/http-request"
+    "http": "ts-node ./src/http-request"
   },
   "keywords": [],
   "author": "",
