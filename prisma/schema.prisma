@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+    provider             = "mysql"
+    url                  = env("DATABASE_URL")
+    referentialIntegrity = "prisma"
+}
+
+model Person {
+    id        Int        @id @default(autoincrement())
+    name      String     @db.VarChar(100)
+    Student   Student?
+    Professor Professor?
+    Address   Address[]
+    vechicle  vechicle[]
+}
+
+model Student {
+    id            Int    @id @default(autoincrement())
+    studentNumber String
+    Person        Person @relation(fields: [personId], references: [id], onDelete: Cascade)
+    personId      Int    @unique
+
+    @@index([personId])
+}
+
+model Professor {
+    id       Int    @id @default(autoincrement())
+    salary   Float
+    Person   Person @relation(fields: [personId], references: [id])
+    personId Int    @unique
+
+    @@index([personId])
+}
+
+model Address {
+    id       Int    @id @default(autoincrement())
+    street   String
+    city     String
+    country  String
+    Person   Person @relation(fields: [personId], references: [id])
+    personId Int
+
+    @@index([personId])
+}
+
+model vechicle {
+    id          Int     @id @default(autoincrement())
+    model       String
+    plateNumber String
+    drives      Drive[]
+    Person      Person  @relation(fields: [personId], references: [id])
+    personId    Int
+
+    @@index([personId])
+}
+
+model Drive {
+    id         Int       @id @default(autoincrement())
+    date       DateTime
+    Distance   Float
+    vechicle   vechicle? @relation(fields: [vechicleId], references: [id])
+    vechicleId Int?
+}
