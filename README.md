@@ -84,3 +84,7 @@ For each option describe what are the cases the solution fits best?
 - When using broker based protocols if receiver service offline due to some reason the data will be delivered once its online
 
 <br />
+
+## DB Models
+
+- please check the `schema.prisma` file prisma folder
